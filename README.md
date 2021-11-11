@@ -1,0 +1,2 @@
+# SelDocs
+Selester Dokumentációs projekt
