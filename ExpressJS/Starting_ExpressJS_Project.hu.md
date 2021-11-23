@@ -24,7 +24,7 @@ A Git repó főkönyvtára általában az, amely a `.git` rejtett mappát tartal
 API-kulcsokat, jelszavakat, belépési azonosítókat és egyéb titkos információkat **TILOS feltölteni a repóba!**
 
 ```bash
-touch babel.config.js
+touch .gitignore
 ```
 
 Ajánlott tartalom:
