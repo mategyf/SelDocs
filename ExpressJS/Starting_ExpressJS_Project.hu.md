@@ -57,7 +57,6 @@ yarn-error.log*
 # Filesystem files
 desktop.ini
 .DS_Store
-
 ```
 
 <!-- Ajánlott tartalom a `.gitignore` fájlhoz: [Példa .gitignore](./examples/.gitignore.example).
