@@ -3,7 +3,7 @@
 ## Git repository
 
 Az Express szerverünket vagy egy meglévő Git repositoryba, vagy egy újonnan létrehozott repoba helyezzük.
-Mindkét esetben ajánlott külön alkönyvtárba helyezni az alkalmazász.
+Mindkét esetben ajánlott külön alkönyvtárba helyezni az alkalmazást.
 
 Például, amennyiben a Git repo neve `MyProject`, és az alkalmazásunké pedig `MyExpressApp`:
 
@@ -14,6 +14,7 @@ Például, amennyiben a Git repo neve `MyProject`, és az alkalmazásunké pedig
   ├── MyExpressApp
   └── ...
 ```
+>A `.git` alkönyvtár általában nem látható, ha nincs engedélyezve a rejtett könyvtárak láthatósága.
 
 ### Fájlok kihagyása a Git-ből
 
@@ -159,11 +160,11 @@ yarn add --dev supertest jest
 
 > Részletesebben [a supertest-ről](https://www.npmjs.com/package/supertest). Ha bonyolultabb teszt kell, akkor a supertest alapja, a [superagent leírása](https://visionmedia.github.io/superagent/) segíthet. Általánosságban pedig a jest tesztelési kertetrendszer [leírása](https://jestjs.io/docs/getting-started) adhat támpontokat.
 
-~~### babel-jest? types/jest?~~
+<!-- ~~### babel-jest? types/jest?~~ -->
 
-```bash
+<!-- ```bash
 yarn add --dev babel-jest @types/jest
-```
+``` -->
 
 ### Linter, avagy a kódpiszkáló
 
@@ -191,21 +192,23 @@ yarn add winston morgan
 
 > Később beállítjuk. Leírás angolul: winston, morgan.
 
+```bash
 yarn add --dev formidable@3
+```
 
 ## Adatbázisok
 
-### MongoDB
+### MongoDB - Mongoose
 
 ```bash
 yarn add mongoose
 ```
 
-### T-SQL
+### ~~T-SQL~~
 
-```bash
+<!-- ```bash
 yarn add mssql
-```
+``` -->
 
 ## Egyéb csomagok
 
