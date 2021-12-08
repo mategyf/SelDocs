@@ -20,6 +20,8 @@ Elvileg csak egyszer kell bejelentkezni, onnan tudni fogja, ki vagyunk. Kilépé
 
 Létre kell hozni egy alkönyvtárat az npm csomag számára. Szerencsés, ha a neve egyezik a csomag nevével, és érdemes egy saját git repository-val társítani. Vagy létrehozni `git init`-tel, vagy a githubon létrehozni és `git clone`-nal leklónozni.
 
+Ne felejtsünk el bele `.gitignore` [fájl](../defaults/.gitignore.example)-t rakni!
+
 Az alkönyvtárban inicializálni kell a csomagot, megadva a scope-ot (felhasználói scope esetén az npm felhsználónév, szervezet esetén a szervezet npm-beli neve)
 
 ```bash
@@ -132,7 +134,7 @@ A teszteléshez persze szükség van egy alkalmazásra, amely használja az új 
 yarn add /path/to/my-npm-package
 ```
 
-Azt az alkönyvtárat adjuk meg, ahol a csomag package.json-ja van.
+Azt az alkönyvtárat adjuk meg, ahol a csomag package.json-ja van. A csomag minden változtatása után szükség lesz frissíteni az importálást.
 
 > Működik relatív útvonallal is, pl. `yarn add ../my-npm-package`.
 
@@ -150,3 +152,13 @@ npm publish --access public
 ```
 
 ## Verzióváltás és verziószámok
+
+https://docs.npmjs.com/about-semantic-versioning
+
+```bash
+npm version <update_type>
+```
+
+ahol <update_type> `patch`, `minor` vagy `major` lehet.
+
+Az npm alapvetően a [Semantic Versioning](https://semver.org/) használatát javasolja.
