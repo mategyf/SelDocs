@@ -14,11 +14,13 @@ npm login
 
 > Ez megkérdezi a felhasználónevet, a jelszót és az e-mail címet, ami publikus lesz (?!??), mert csak.
 
+Elvileg csak egyszer kell bejelentkezni, onnan tudni fogja, ki vagyunk. Kilépéshez az `npm logout`, a felhasználónév leellenőrzéséhez pedig az `npm whoami` parancsokat lehet használni.
+
 ## Projekt inicializálása
 
 Létre kell hozni egy alkönyvtárat az npm csomag számára. Szerencsés, ha a neve egyezik a csomag nevével, és érdemes egy saját git repository-val társítani. Vagy létrehozni `git init`-tel, vagy a githubon létrehozni és `git clone`-nal leklónozni.
 
-Az alkönyvtárban inicializálni kell a csomagot, megadva a scope-ot:
+Az alkönyvtárban inicializálni kell a csomagot, megadva a scope-ot (felhasználói scope esetén az npm felhsználónév, szervezet esetén a szervezet npm-beli neve)
 
 ```bash
 npm init --scope=@my-user
@@ -27,13 +29,13 @@ npm init --scope=@my-user
 1. A csomag neve az alkönyvtár nevét használja alapból, olyasmi lesz, hogy "@my-user/my-npm-package".
 2. A verziószámot rendszerint 1.0.0-nak szokták megadni az első publikált változatnak.
 3. A leírást érdemes néhány szóban megfogalmazni.
-4. Az entry point azt adja meg, hogy mely fájl fogja a csomagunk gyökerét képezni. Itt azt adjuk meg, hogy 
+4. Az entry point azt adja meg, hogy mely fájl fogja a csomagunk gyökerét képezni. Itt azt adjuk meg, hogy:
 
    ```bash
    lib/index.js
    ```
 
-5. Test parancsot nem szükséges meghatározni, később szerkeszthetjük közvetlenül is.
+5. Teszt parancsot nem szükséges meghatározni, később szerkeszthetjük közvetlenül is.
 6. Meg lehet adni a fentebb létrehozott git repót.
 7. Keywords: az npm csomagok közti keresés megkönnyítésére lehet kulcsszavakat megadni. Ráér később.
 8. Szerző: megadhatjuk a szervezetet vagy felhasználót, de a json-ban könnyebb szerkeszteni.
@@ -114,17 +116,37 @@ lib/
 ## Kódolás
 
 Végre nekiállhatunk a kód megírásának. Tegyük szokás szerint egy `/src` alkönyvtárba.
+Amint kész a program, build-elni kell. Ezt **minden változtatás után** végre kell hajtani, értelem szerűen.
+
+```bash
+yarn build
+```
 
 ## Tesztelés
 
-A csomagot fontos előre letesztelni, mert publikálás után már csak újabb verziószámmal lehet felülírni, így érdemes kipróbálni, hogy minden rendben működik-e.
+A csomagot fontos előre letesztelni, mert **publikálás után már csak újabb verziószámmal lehet felülírni**, így érdemes kipróbálni, hogy minden rendben működik-e.
 
+A teszteléshez persze szükség van egy alkalmazásra, amely használja az új csomagunkat. Ehhez az alkalmazáshoz manuálisan hozzáadjuk a csomagot, teljes elérési úttal:
 
+```bash
+yarn add /path/to/my-npm-package
+```
 
+Azt az alkönyvtárat adjuk meg, ahol a csomag package.json-ja van.
 
+> Működik relatív útvonallal is, pl. `yarn add ../my-npm-package`.
 
-yarn build
+**A tesztelés iterációi tehát így néznek ki:**
+
+1. Kód módosítása, javítása, ezek mentése
+2. Az npm csomag alkönyvtárában `yarn build`
+3. A tesztelő alkalmazás alkönyvtárában `yarn add /path/to/my-npm-package`
+4. Az alkalmazás futtatása vagy ellenőrzése, hiba esetén vissza 1-re.
+
+## Publikálás
 
 ```bash
 npm publish --access public
 ```
+
+## Verzióváltás és verziószámok
