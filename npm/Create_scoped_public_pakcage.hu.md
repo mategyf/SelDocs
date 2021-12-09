@@ -46,15 +46,15 @@ npm init --scope=@my-user
 
 Ezután létrejön a `package.json`.
 
-> A scope-ot lehet utólag is módosítani a `package.json`-ban, a "name" mező szerkesztésével.
+> A paramétereket lehet utólag is módosítani a `package.json`-ban.
 
 ## Babel
 
 A csomagokat érdemes ES6 szabvány szerint írni, viszont emiatt rengeteg bonyodalom van a modulok importálása és exportálása körül. A megoldás a babel használata az npm csomag összerakásához.
 
-Ez úgy történik, hogy a csomagot minden publikálás (és tesztelés) előtt le kell build-elni a /lib alkönyvtárba.
+Ez úgy történik, hogy a csomagot minden publikálás (és tesztelés) előtt le kell build-elni a `/lib` alkönyvtárba.
 
-> Npm csomagok esetén szokás a `/lib` alkönyvtár használata, de bármely másikkal is működik.
+> Npm csomagok esetén rendszerint a `/lib` alkönyvtárat használjuk, de másikkal is működik.
 
 ### Telepítés
 
@@ -97,6 +97,8 @@ A `scripts` részbe:
     "build": "babel src -d lib",
 ```
 
+> Ez a `/src` alkönyvtár tartalmát build-eli a `/lib` alkönyvtárba.
+
 Egy külön `files` részbe:
 
 ```json
@@ -115,9 +117,34 @@ Ellenőrizzük, hogy a `.gitignore` fájlunkban szerepel-e a `/lib` alkönyvtár
 lib/
 ```
 
-## Kódolás
+## Kódolás, import/export
 
 Végre nekiállhatunk a kód megírásának. Tegyük szokás szerint egy `/src` alkönyvtárba.
+
+Az src alkönyvtárban szükség lesz egy `index.js` fájlra, amely exportálja a csomagunk importálható objektumait (amennyiben a `package.json` "main" mezőjében azt definiáltuk).
+
+### Default export
+
+Amennyiben default exportot használunk:
+
+```javascript
+import logger from './logger';
+
+export default logger;
+```
+
+az alkalmazásban, amely felhasználja, a következőképp lehet importálni:
+
+```javascript
+import logger from '@mategyf/express-logger';
+// ...
+```
+
+### Named export
+
+...
+...
+
 Amint kész a program, build-elni kell. Ezt **minden változtatás után** végre kell hajtani, értelem szerűen.
 
 ```bash
@@ -138,22 +165,38 @@ Azt az alkönyvtárat adjuk meg, ahol a csomag package.json-ja van. A csomag min
 
 > Működik relatív útvonallal is, pl. `yarn add ../my-npm-package`.
 
-**A tesztelés iterációi tehát így néznek ki:**
+Miután egyszer hozzáadtuk a csomagot a teszt alkalmazáshoz, a csomag frissítése után a fenti paranccsal, vagy a
+
+```bash
+yarn upgrade
+```
+
+paranccsal lehet a build-elt csomagot frissíteni.
+
+### **A tesztelés iterációi tehát így néznek ki:**
 
 1. Kód módosítása, javítása, ezek mentése
 2. Az npm csomag alkönyvtárában `yarn build`
-3. A tesztelő alkalmazás alkönyvtárában `yarn add /path/to/my-npm-package`
+3. A tesztelő alkalmazás alkönyvtárában `yarn upgrade`
 4. Az alkalmazás futtatása vagy ellenőrzése, hiba esetén vissza 1-re.
 
 ## Publikálás
+
+A csomagot ezek után lehet az npm repository-jába publikálni.
 
 ```bash
 npm publish --access public
 ```
 
+> Ez egy publikus kiadás lesz. A privát kiadások előfizetéshez kötöttek.
+<!--  -->
+> A publikálást visszavonni csak a kiadástól számított 72 óráig lehet, vagy ha megfelel bizonyos kritériumoknak.
+
 ## Verzióváltás és verziószámok
 
-https://docs.npmjs.com/about-semantic-versioning
+Publikálás után csak és kizárólag verziószám frissítés után lehet javítást, fejlesztést újra kiadni. A verziószámok kiadásához érdemes [az npm javaslatát](https://docs.npmjs.com/about-semantic-versioning) követni.
+
+Parancssorból így lehet verziószámot növelni:
 
 ```bash
 npm version <update_type>
