@@ -117,15 +117,27 @@ Ellenőrizzük, hogy a `.gitignore` fájlunkban szerepel-e a `/lib` alkönyvtár
 lib/
 ```
 
-## Kódolás, import/export
+## Kódolás
+
+
 
 Végre nekiállhatunk a kód megírásának. Tegyük szokás szerint egy `/src` alkönyvtárba.
 
 Az src alkönyvtárban szükség lesz egy `index.js` fájlra, amely exportálja a csomagunk importálható objektumait (amennyiben a `package.json` "main" mezőjében azt definiáltuk).
 
-### Default export
+## Build
 
-Amennyiben default exportot használunk:
+Amint kész a program, build-elni kell. Ezt **minden változtatás után** végre kell hajtani, értelem szerűen.
+
+```bash
+yarn build
+```
+
+## import/export
+
+### ~~Default export~~
+
+~~Amennyiben default exportot használunk:~~
 
 ```javascript
 import logger from './logger';
@@ -133,7 +145,7 @@ import logger from './logger';
 export default logger;
 ```
 
-az alkalmazásban, amely felhasználja, a következőképp lehet importálni:
+~~az alkalmazásban, amely felhasználja, a következőképp lehet importálni:~~
 
 ```javascript
 import logger from '@mategyf/express-logger';
@@ -142,14 +154,39 @@ import logger from '@mategyf/express-logger';
 
 ### Named export
 
-...
-...
+A csomagunkból exportálás az index.js-ben:
 
-Amint kész a program, build-elni kell. Ezt **minden változtatás után** végre kell hajtani, értelem szerűen.
+```javascript
+function sayHello() {
+  console.log('Hello!');
+}
 
-```bash
-yarn build
+function sayBye() {
+  console.log('Bye!');
+}
+
+export { sayHello, sayBye };
 ```
+
+És az importálás a teszt alkalmazásban:
+
+```javascript
+import pkg from '@my-user/my-npm-package';
+
+pkg.sayHello();   // Hello!
+pkg.sayBye();     // Bye!
+```
+
+**Vagy:**
+
+```javascript
+import { sayHello, sayBye } from '@my-user/my-npm-package';
+
+sayHello();   // Hello!
+sayBye();     // Bye!
+```
+
+
 
 ## Tesztelés
 
@@ -168,16 +205,16 @@ Azt az alkönyvtárat adjuk meg, ahol a csomag package.json-ja van. A csomag min
 Miután egyszer hozzáadtuk a csomagot a teszt alkalmazáshoz, a csomag frissítése után a fenti paranccsal, vagy a
 
 ```bash
-yarn upgrade
+yarn upgrade /path/to/my-npm-package
 ```
 
-paranccsal lehet a build-elt csomagot frissíteni.
+paranccsal lehet a build-elt csomagot frissíteni. Paraméter nélkül `yarn upgrade` kiadásával lehet az összes csomagot frissíteni, ha szükséges.
 
 ### **A tesztelés iterációi tehát így néznek ki:**
 
 1. Kód módosítása, javítása, ezek mentése
 2. Az npm csomag alkönyvtárában `yarn build`
-3. A tesztelő alkalmazás alkönyvtárában `yarn upgrade`
+3. A tesztelő alkalmazás alkönyvtárában `yarn upgrade /path/to/my-npm-package`
 4. Az alkalmazás futtatása vagy ellenőrzése, hiba esetén vissza 1-re.
 
 ## Publikálás
