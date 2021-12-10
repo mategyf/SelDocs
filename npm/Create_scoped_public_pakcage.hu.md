@@ -140,15 +140,15 @@ yarn build
 ~~Amennyiben default exportot használunk:~~
 
 ```javascript
-import logger from './logger';
+// import logger from './logger';
 
-export default logger;
+// export default logger;
 ```
 
 ~~az alkalmazásban, amely felhasználja, a következőképp lehet importálni:~~
 
 ```javascript
-import logger from '@mategyf/express-logger';
+// import logger from '@mategyf/express-logger';
 // ...
 ```
 
