@@ -22,12 +22,13 @@ flutter pub get
 
 ### 1.2. Upload Key
 
-Szükség van az applikáció upload key-jére, amit jó eséllyel az első feltöltéskor generáltunk. Két fájl kell, ellenőrizzük, hogy megvannak-e:
+Szükség van az applikáció `upload key`-jére, amit jó eséllyel az első feltöltéskor generáltunk. Két fájl kell, ellenőrizzük, hogy megvannak-e:
 
 `<app_name>/android/app/upload-keystore.jks`
+
 `<app_name>/android/key.properties`
 
-Ezt a két fájlt **TILOS git-be feltölteni!**
+Ezt a két fájlt _**TILOS git-be feltölteni!**_
 
 ### 1.3. Build-elés
 
@@ -44,12 +45,17 @@ Lépjünk be a Play Console-ra, válasszuk ki az alkalmazást a "Minden alkalmaz
 
 A bal oldali navigációs sávban lépjünk a megfelelő csatornára: a három tesztelési egyikére vagy az éles verzióra.
 
-Jobb oldalt felül található egy "Kiadás szerkesztése" kék gomb, mellyel új kiadást hozhatunk létre. Középen lesz egy "Alkalmazáscsomagok" mező, ide kell behúzni a korábban build-elt app bundle-t.
+Jobb oldalt felül található egy "Új kiadás létrehozása" kék gomb, mellyel új kiadást hozhatunk létre. Középen lesz egy "Alkalmazáscsomagok" mező, ide kell behúzni a korábban build-elt app bundle-t.
+
+Várjuk meg, amíg feldolgozza a rendszer a csomagot.
 
 Legörgetve a "kiadás adatai"-hoz a verziónevet automatikusan kitölti a rendszer, de a kibocsátási megjegyzéseket (changelog) magunknak kell megadni.
 
 Ezek után az oldal alján "mentés", majd "Kiadás ellenőrzése" kék gomb.
 
 Ezután frissül a lap, és megnézhetjük a hibaüzeneteket, figyelmeztetéseket.
+Megtekinthetünk néhány statisztikát, és beállíthatjuk a `fokozatos közzététel` paramétereit. Ez utóbbi lehetővé teszi, hogy az aktív felhasználók csak egy bizonyos százalékának kerüljön kiadásra az új változat.
 
 Alul jobbra van a "Közzététel megkezdése..." kék gomb.
+
+A közzététel megkezdése után a kiadás "ellenőrzés alatt" státuszba kerül, amíg a Google el nem végzi az ellenőrzést. Amint ez megtörtént, az app elérhető lesz a Play Store-ban (vagy a tesztelési csatornán).
