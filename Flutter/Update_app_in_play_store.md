@@ -12,7 +12,9 @@ Növeljük az app verziószámát a pubspec.yaml fájlban:
 version: 1.0.0+1
 ```
 
-Érdemes a semver elveit követni.
+> A verziószám két (egymástól független) részből tevődik össze: a `versionName`, jelen esetben 1.0.0, és a `+` jel után a `versionCode`. A `versionName` egy sztring, melyet gyakorlatilag egyénileg választhatunk meg, de érdemes a [Semver](https://semver.org/) elveit követni. A `versionCode` egy integer, melyet minden egymás utáni változatban növelnünk kell, nem lehet kisebb értéket adni neki. Ez utóbbiból tudja majd a rendszer, hogy egy verzió frissebb-e egy másiknál.
+>
+> A Play áruház felhasználói számára csak a `versionName` lesz látható.
 
 Ezután frissítsük a csomagot a `Pub get` gombbal vagy terminálból:
 
@@ -22,7 +24,7 @@ flutter pub get
 
 ### 1.2. Upload Key
 
-Szükség van az applikáció `upload key`-jére, amit jó eséllyel az első feltöltéskor generáltunk. Két fájl kell, ellenőrizzük, hogy megvannak-e:
+Szükség van az applikáció `upload key`-jére, amit, jó eséllyel, az első feltöltéskor generáltunk. Két fájl kell, ellenőrizzük, hogy megvannak-e:
 
 `<app_name>/android/app/upload-keystore.jks`
 
@@ -34,6 +36,9 @@ Ezt a két fájlt _**TILOS git-be feltölteni!**_
 
 ```bash
 flutter clean
+```
+
+```bash
 flutter build appbundle
 ```
 
@@ -59,3 +64,7 @@ Megtekinthetünk néhány statisztikát, és beállíthatjuk a `fokozatos közz�
 Alul jobbra van a "Közzététel megkezdése..." kék gomb.
 
 A közzététel megkezdése után a kiadás "ellenőrzés alatt" státuszba kerül, amíg a Google el nem végzi az ellenőrzést. Amint ez megtörtént, az app elérhető lesz a Play Store-ban (vagy a tesztelési csatornán).
+
+## Korábbi kiadás átminősítése
+
+Amint rámegyünk valamely tesztelési csatornára, a "kiadások" mező alján található egy "kiadás előresorolása" legördülő menü. ennek segítségével egy tesztelési csatornán lévő kliadást átminősíthetünk, előresorolhatunk egy magasabb tesztelési csatornára vagy az éles csatornára. 
