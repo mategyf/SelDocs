@@ -2,17 +2,25 @@
 
 ## React app létrehozása: create-react-app és yarn 2+
 
-1. `yarn create react-app myApp` (yes, is yarn 1.22 in my case)
+A létrehozandó applikáció: *selester-webpage-frontend*
 
-2. rename the package.json for a while
+~~1. `yarn create react-app myApp` (yes, is yarn 1.22 in my case)~~
 
-3. `yarn init -2` #this will create another package.json
+1. `npx create-react-app selester-webpage-frontend`
 
-4. merge the old package.json with the newly created one
+2. `cd selester-webpage-frontend`
 
-5. `yarn install`
+3. rename the package.json for a while
 
-Forrás: <https://stackoverflow.com/a/70342944>
+4. `yarn init -2` #this will create another package.json
+
+5. Töröld az alkönyvtárban létrehozott `.git` alkönyvtárat
+
+6. merge the old package.json with the newly created one (A gyakorlatban annyit kell átmásolni, hogy `"packageManager": "yarn@3.3.1"`)
+
+7. `yarn install`
+
+Eredeti forrás: <https://stackoverflow.com/a/70342944>
 
 ## React kiszolgálása nem a gyökér URL-ről
 
