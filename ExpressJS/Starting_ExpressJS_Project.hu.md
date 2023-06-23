@@ -31,10 +31,6 @@ touch .gitignore
 Ajánlott tartalom:
 
 ```gitignore
-# VS, VS Code config
-.vs/
-.vscode/
-
 # Package dependencies
 node_modules/
 
@@ -43,11 +39,16 @@ build/
 dist/
 
 # env variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env*
+# include examples
+!.env.example*
+
+# Docker
+Dockerfile*
+docker-compose*
+# include examples
+!Dockerfile.example*
+!docker-compose.example*
 
 # logs
 logs/
