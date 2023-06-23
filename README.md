@@ -11,3 +11,5 @@
 Jegyzetek React-hoz
 
 [React dokumentáció](./ReactJS/react-main.hu.md)
+
+[Customer Portal](./CustomerPortal/cp_main.hu.md)
